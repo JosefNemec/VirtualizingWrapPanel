@@ -360,7 +360,14 @@ namespace WpfToolkit.Controls
                 {
                     if (VirtualizationMode == VirtualizationMode.Recycling)
                     {
-                        ItemContainerGenerator.Recycle(generatorPosition, 1);
+                        try
+                        {
+                            ItemContainerGenerator.Recycle(generatorPosition, 1);
+                        }
+                        catch
+                        {
+                            // There are some weird null-reference crash reports from Generator.Recycle
+                        }
                     }
                     else
                     {
